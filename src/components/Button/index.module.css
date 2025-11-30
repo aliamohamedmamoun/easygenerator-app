@@ -1,0 +1,24 @@
+.button {
+    cursor: pointer;
+    padding: 8px 12px;
+    outline: none;
+    border:0;
+    color: black;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.primary {
+     color: #ffffff;
+     background-color:#f0754d ;
+}
+.secondary {
+    background-color: #ffffff;
+    color: #f0754d;
+    border: 1px solid #f0754d
+}
+.button:disabled{
+    cursor: default;
+    background-color:#dedede ;
+    color:#42515f;
+}
