@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -7,10 +7,15 @@ import InputField from '../../components/InputField';
 import Button from '../../components/Button';
 import { signUp } from '../../apis/auth';
 import { APP_ROUTES } from '../../constants/routes';
+import { AuthContext } from '../../contexts/AuthContext';
+
 import styles from './signupForm.module.css';
+
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const {fetchCurrentUser} = useContext(AuthContext)
+
   const signUpSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, 'Minimum of 3 characters')
@@ -35,6 +40,7 @@ const SignUp = () => {
     resetForm();
     try {
       const data = await signUp({ name, email, password });
+      fetchCurrentUser()
       toast.success(data.message || 'Sign up successful');
       navigate(APP_ROUTES.HOME);
     } catch (err: any) {

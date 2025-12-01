@@ -4,6 +4,7 @@
     padding:12px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     position: sticky;
     top:0;
     background-color: #ffffff;
@@ -31,4 +32,9 @@
 .activeLink {
     color: #f0754d;
     font-weight: 600;
+}
+.userWrapper{
+    display:flex;
+    align-items: center;
+    gap:12px
 }

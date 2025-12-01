@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useContext}from 'react';
 import { Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -7,10 +7,14 @@ import InputField from '../../components/InputField';
 import Button from '../../components/Button';
 import { login } from '../../apis/auth';
 import { APP_ROUTES } from '../../constants/routes';
+import { AuthContext } from '../../contexts/AuthContext';
+
 import styles from '../signup/signupForm.module.css';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const {fetchCurrentUser} = useContext(AuthContext)
+
   const signInSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Please enter email'),
     password: Yup.string()
@@ -29,6 +33,7 @@ const SignIn = () => {
     resetForm();
     try {
       const data = await login({ email, password });
+      fetchCurrentUser()
       toast.success(data.message || 'login successful');
       navigate(APP_ROUTES.HOME);
     } catch (err: any) {
